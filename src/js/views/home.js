@@ -1,22 +1,29 @@
+// https://www.swapi.tech/documentation
+
 import React, { useEffect, useContext } from "react";
 import "../../styles/home.css";
 import { Context } from "../store/appContext";
 import { CardCharacter } from "../component/cardCharacter.jsx";
 import { CardPlanets } from "../component/cardPlanets.jsx";
-import { CardVehicles } from "../component/cardVehicles.jsx";
+import { CardVehicle } from "../component/cardVehicles.jsx";
+
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
+    const handleCharacterClick = (uid) => {
+        actions.getInfoCharacter(uid);
+    };
 
     useEffect(() => {
         actions.getAllCharacters();
         actions.getAllPlanets();
         actions.getAllVehicles();
+
     }, []);
 
-    console.log(store.characters);
-    console.log(store.planets);
-    console.log(store.vehicles);
+    // console.log(store.characters);
+    // console.log(store.planets);
+    // console.log(store.vehicles);
 
 
     return (
@@ -27,12 +34,10 @@ export const Home = () => {
                     <div className="d-flex " style={{ overflowX: "scroll" }}>
                         {store.characters.map((item) => {
                             return (
-                                <div className="text-center mt-5" key={item.id}>
+                                <div className="text-center mt-5" key={item.uid}>
                                     <CardCharacter
-                                        properties={item}
-                                        name={item.name}
-                                        hair_color={item.hair_color}
-                                        eye_color={item.eye_color}
+                                        character={item}
+                                    
                                     />
                                 </div>
                             );
@@ -45,10 +50,9 @@ export const Home = () => {
                     <div className="d-flex " style={{ overflowX: "scroll" }}>
                         {store.planets.map((item) => {
                             return (
-                                <div className="text-center mt-5" key={item.id}>
+                                <div className="text-center mt-5" key={item.uid}>
                                     <CardPlanets
-                                        properties={item}
-                                        name={item.name}
+                                        planet={item}
                                     />
                                 </div>
                             );
@@ -61,10 +65,9 @@ export const Home = () => {
                     <div className="d-flex " style={{ overflowX: "scroll" }}>
                         {store.vehicles.map((item) => {
                             return (
-                                <div className="text-center mt-5" key={item.id}>
-                                    <CardVehicles
-                                        properties={item}
-                                        name={item.name}
+                                <div className="text-center mt-5" key={item.uid}>
+                                    <CardVehicle
+                                        vehicle={item}
                                     />
                                 </div>
                             );

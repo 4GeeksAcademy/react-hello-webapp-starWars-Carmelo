@@ -10,6 +10,11 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
+import { DetallesPeople } from "./views/People";
+import { DetallesPlanet } from "./views/planet";
+import { DetallesVehicle } from "./views/vehicle";
+
+
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -25,6 +30,9 @@ const Layout = () => {
 						<Route path="/" element={<Home />} />
 						<Route path="/demo" element={<Demo />} />
 						<Route path="/single/:theid" element={<Single />} />
+						<Route path="/people/:id" element={<DetallesPeople />} />
+						<Route path="/planet/:id" element={<DetallesPlanet />} />
+						<Route path="/vehicle/:id" element={<DetallesVehicle />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
 					<Footer />
